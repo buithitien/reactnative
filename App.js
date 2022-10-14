@@ -1,37 +1,66 @@
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const FirstScreen = () => {
-  const [flexDirection, setflexDirection] = useState("column");
+function FirstScreen() {
+  const [direction, setDirection] = useState('flex-start');
 
   return (
     <PreviewLayout
-      label="flexDirection"
-      values={["column", "row", "row-reverse", "column-reverse"]}
-      selectedValue={flexDirection}
-      setSelectedValue={setflexDirection}
-    >
-      <View
-        style={[styles.box, { backgroundColor: "black" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "blue" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "green" }]}
-      />
+      label="direction"
+      selectedValue={direction}
+      values={['flex-start', 'flex-end']}
+      setSelectedValue={setDirection}>
+      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
+      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
     </PreviewLayout>
   );
 };
-FirstScreen
+
+const PreviewLayout = ({
+  label,
+  children,
+  values,
+  selectedValue,
+  setSelectedValue,
+}) => (
+  <View style={{padding: 10, flex: 1}}>
+    <Text style={styles.label}>{label}</Text>
+    <View style={styles.row}>
+      {values.map(value => (
+        <TouchableOpacity
+          key={value}
+          onPress={() => setSelectedValue(value)}
+          style={[styles.button, selectedValue === value && styles.selected]}>
+          <Text
+            style={[
+              styles.buttonLabel,
+              selectedValue === value && styles.selectedLabel,
+            ]}>
+            {value}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+    <View
+      style={[
+        styles.container,
+        {alignItems: selectedValue},
+      ]}>
+      {children}
+    </View>
+  </View>
+);
+
 function SecondScreen() {
   const [position, setPosition] = useState('relative');
   const values = ['relative', 'absolute'];
 
   return (
-    <View style={{ padding: 10, flex: 1 }}>
+    <View style={{padding: 10, flex: 1}}>
       <View style={styles.row}>
         {values.map(value => (
           <TouchableOpacity
@@ -86,11 +115,11 @@ function SecondScreen() {
     </View>
   );
 }
-const JustifyContentBasics = () => {
+function ThirdScreen() {
   const [justifyContent, setJustifyContent] = useState("flex-start");
 
   return (
-    <PreviewLayout
+    <PreviewLayout3
       label="justifyContent"
       selectedValue={justifyContent}
       values={[
@@ -112,11 +141,10 @@ const JustifyContentBasics = () => {
       <View
         style={[styles.box, { backgroundColor: "steelblue" }]}
       />
-    </PreviewLayout>
+    </PreviewLayout3>
   );
-};
-
-const PreviewLayout = ({
+}
+const PreviewLayout3 = ({
   label,
   children,
   values,
@@ -149,7 +177,6 @@ const PreviewLayout = ({
   </View>
 );
 
-
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
@@ -157,11 +184,12 @@ function MyTabs() {
     <Tab.Navigator>
       <Tab.Screen name="direction" component={FirstScreen} />
       <Tab.Screen name="position" component={SecondScreen} />
-      <Tab.Screen name="Jutifycontent" component={JustifyContentBasics} />
+      <Tab.Screen name="Justify Content" component={ThirdScreen} />
 
     </Tab.Navigator>
   );
 }
+
 const styles = {
   container: {
     flex: 1,
