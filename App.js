@@ -1,243 +1,70 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import * as React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import BottomTab from './navigate/bottomTab';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './screen/home';
+import Profile from './screen/profile';
+import New from './screen/new';
+import Notification from './screen/notification';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-function FirstScreen() {
-  const [direction, setDirection] = useState('flex-start');
-
-  return (
-    <PreviewLayout
-      label="direction"
-      selectedValue={direction}
-      values={['flex-start', 'flex-end']}
-      setSelectedValue={setDirection}>
-      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
-    </PreviewLayout>
-  );
-};
-
-const PreviewLayout = ({
-  label,
-  children,
-  values,
-  selectedValue,
-  setSelectedValue,
-}) => (
-  <View style={{padding: 10, flex: 1}}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-      {values.map(value => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => setSelectedValue(value)}
-          style={[styles.button, selectedValue === value && styles.selected]}>
-          <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}>
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-    <View
-      style={[
-        styles.container,
-        {alignItems: selectedValue},
-      ]}>
-      {children}
-    </View>
-  </View>
-);
-
-function SecondScreen() {
-  const [position, setPosition] = useState('relative');
-  const values = ['relative', 'absolute'];
-
-  return (
-    <View style={{padding: 10, flex: 1}}>
-      <View style={styles.row}>
-        {values.map(value => (
-          <TouchableOpacity
-            key={value}
-            onPress={() => setPosition(value)}
-            style={[styles.button, position === value && styles.selected]}>
-            <Text
-              style={[
-                styles.buttonLabel,
-                position === value && styles.selectedLabel,
-              ]}>
-              {value}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.box,
-            {
-              top: 25,
-              left: 25,
-              position,
-              backgroundColor: 'powderblue',
-            },
-          ]}
-        />
-        <View
-          style={[
-            styles.box,
-            {
-              top: 50,
-              left: 50,
-              position,
-              backgroundColor: 'skyblue',
-            },
-          ]}
-        />
-        <View
-          style={[
-            styles.box,
-            {
-              top: 75,
-              left: 75,
-              position,
-              backgroundColor: 'steelblue',
-            },
-          ]}
-        />
-      </View>
-    </View>
-  );
-}
-function ThirdScreen() {
-  const [justifyContent, setJustifyContent] = useState("flex-start");
-
-  return (
-    <PreviewLayout3
-      label="justifyContent"
-      selectedValue={justifyContent}
-      values={[
-        "flex-start",
-        "flex-end",
-        "center",
-        "space-between",
-        "space-around",
-        "space-evenly",
-      ]}
-      setSelectedValue={setJustifyContent}
-    >
-      <View
-        style={[styles.box, { backgroundColor: "powderblue" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "skyblue" }]}
-      />
-      <View
-        style={[styles.box, { backgroundColor: "steelblue" }]}
-      />
-    </PreviewLayout3>
-  );
-}
-const PreviewLayout3 = ({
-  label,
-  children,
-  values,
-  selectedValue,
-  setSelectedValue,
-}) => (
-  <View style={{ padding: 10, flex: 1 }}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-      {values.map((value) => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => setSelectedValue(value)}
-          style={[styles.button, selectedValue === value && styles.selected]}
-        >
-          <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}
-          >
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-    <View style={[styles.container, { [label]: selectedValue }]}>
-      {children}
-    </View>
-  </View>
-);
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="direction" component={FirstScreen} />
-      <Tab.Screen name="position" component={SecondScreen} />
-      <Tab.Screen name="Justify Content" component={ThirdScreen} />
-
-    </Tab.Navigator>
-  );
-}
-
-const styles = {
-  container: {
-    flex: 1,
-    marginTop: 8,
-    backgroundColor: 'grey',
-  },
-  box: {
-    width: 50,
-    height: 50,
-  },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  button: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 4,
-    backgroundColor: 'oldlace',
-    alignSelf: 'flex-start',
-    marginHorizontal: '1%',
-    marginBottom: 6,
-    minWidth: '48%',
-    textAlign: 'center',
-  },
-  selected: {
-    backgroundColor: 'coral',
-    borderWidth: 0,
-  },
-  buttonLabel: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: 'coral',
-  },
-  selectedLabel: {
-    color: 'white',
-  },
-  label: {
-    textAlign: 'center',
-    marginBottom: 10,
-    fontSize: 24,
-  },
-};
-
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          tabBarActiveTintColor: '#e91e63',
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Notification"
+          component={Notification}
+          options={{
+            tabBarLabel: 'Updates',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+            ),
+            tabBarBadge: 3,
+          }}
+        />
+        <Tab.Screen
+          name="New"
+          component={New}
+          options={{
+            tabBarLabel: 'New',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
+export default App;
