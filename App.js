@@ -2,14 +2,11 @@ import * as React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import BottomTab from './navigate/bottomTab';
-import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screen/home';
 import Profile from './screen/profile';
-import New from './screen/new';
+import Map from './screen/map';
 import Notification from './screen/notification';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -28,7 +25,7 @@ function App() {
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+              <Ionicons name="md-home" size={32} color="black" />
             ),
           }}
         />
@@ -38,18 +35,18 @@ function App() {
           options={{
             tabBarLabel: 'Updates',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+              <Ionicons name="md-checkmark-circle" size={32} color="black" />
             ),
             tabBarBadge: 3,
           }}
         />
         <Tab.Screen
-          name="New"
-          component={New}
+          name="Map"
+          component={Map}
           options={{
-            tabBarLabel: 'New',
+            tabBarLabel: 'Map',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+              <Ionicons name="md-location" size={32} color="black" />
             ),
           }}
         />
@@ -59,7 +56,7 @@ function App() {
           options={{
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+              <Ionicons name="md-person-circle-sharp" size={32} color="black" />
             ),
           }}
         />

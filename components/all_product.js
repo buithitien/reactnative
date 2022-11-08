@@ -1,5 +1,5 @@
 
-import {StyleSheet,Text,View,Image,FlatList,SafeAreaView,} from "react-native";
+import { StyleSheet, Text, View, Image, FlatList, SafeAreaView, } from "react-native";
 export default function Product() {
   const AllProducts = [
     {
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
   product: {
     flex: 3,
   },
- allProduct : {
+  allProduct: {
     marginVertical: 10,
     marginHorizontal: 40,
     borderWidth: 1,
     borderColor: "#f2f4f6",
     borderRadius: 15,
   },
-  imgProduct:{
-    height:100,
+  imgProduct: {
+    height: 100,
   },
   nameProduct: {
     width: 120,

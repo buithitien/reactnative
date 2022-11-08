@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 import React from 'react'
 
-const DATA = [
+const Product = [
     {
         id: '1',
         title: 'Sugar Substitute',
@@ -35,6 +35,45 @@ const DATA = [
     }
 ];
 
+const AllProducts = [
+    {
+        id: "1",
+        name: "Accu-check Active Test Strip",
+        img: require("../assets/image20.png"),
+        price: 112,
+    },
+    {
+        id: "2",
+        name: "Omron HEM-8712 BP Monitor",
+        img: require("../assets/image21.png"),
+        price: 150,
+    },
+    {
+        id: "3",
+        name: "Accu-check Active Test Strip",
+        img: require("../assets/image22.png"),
+        price: 112,
+    },
+    {
+        id: "4",
+        name: "Omron HEM-8712 BP Monitor",
+        img: require("../assets/image23.png"),
+        price: 150,
+    },
+    {
+        id: "3",
+        name: "Accu-check Active Test Strip",
+        img: require("../assets/image22.png"),
+        price: 112,
+    },
+    {
+        id: "4",
+        name: "Omron HEM-8712 BP Monitor",
+        img: require("../assets/image23.png"),
+        price: 150,
+    },
+];
+
 const Item = ({ title, img }) => (
     <View style={styles.item}>
         <Image style={styles.image} source={img} />
@@ -42,36 +81,60 @@ const Item = ({ title, img }) => (
 
     </View>
 );
+const AllProduct = ({ name, img, price }) => (
+    <View style={styles.allProduct}>
+        <Image style={styles.imgProduct} source={img} />
+        <Text style={styles.nameProduct}>{name}</Text>
+        <Text style={styles.priceProduct}>${price}</Text>
+    </View>
+);
+const render = ({ item }) => (
+    <AllProduct name={item.name} img={item.img} price={item.price} />
+);
 const Home = () => {
     const renderItem = ({ item }) => (
-        <Item title={item.title} img={item.img}  />
+        <Item title={item.title} img={item.img} />
     );
 
     return (
         <SafeAreaView style={styles.container}>
             <Text>Diabetic Diet</Text>
             <FlatList
-                data={DATA}
+                data={Product}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 horizontal
 
             />
+            <View style={styles.product}>
+      <Text style={styles.title3}>All Products</Text>
+      <SafeAreaView>
+        <FlatList
+          numColumns={2}
+          data={AllProducts}
+          renderItem={render}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        marginTop:80,
+    container: {
     },
     item: {
         marginVertical: 8,
-        marginHorizontal: 10,
+        marginHorizontal: 15,
     },
     title: {
         fontSize: 13,
-        width:60
+        width: 65
     },
+    allProduct:{
+        marginLeft:20,
+    }
+    
 });
 export default Home;
