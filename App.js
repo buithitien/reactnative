@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import Home from './screen/home';
 import Profile from './screen/profile';
 import Map from './screen/map';
-import Notification from './screen/notification';
+import CallData from './screen/car';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import axios from 'axios';
+import Page from './screen/page';
+import Detail from './screen/detail';
 
 const Tab = createBottomTabNavigator();
 function App() {
@@ -19,7 +22,7 @@ function App() {
           tabBarActiveTintColor: '#e91e63',
         }}
       >
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Home"
           component={Home}
           options={{
@@ -28,10 +31,30 @@ function App() {
               <Ionicons name="md-home" size={32} color="black" />
             ),
           }}
+        /> */}
+        <Tab.Screen
+          name="page"
+          component={Page}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-home" size={32} color="black" />
+            ),
+          }}
+        />
+         <Tab.Screen
+          name="Detail"
+          component={Detail}
+          options={{
+            tabBarLabel: 'Detail',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="md-open" size={32} color="black" />
+            ),
+          }}
         />
         <Tab.Screen
-          name="Notification"
-          component={Notification}
+          name="CallData"
+          component={CallData}
           options={{
             tabBarLabel: 'Updates',
             tabBarIcon: ({ color, size }) => (

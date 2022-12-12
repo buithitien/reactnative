@@ -1,86 +1,78 @@
 import {
-    SafeAreaView, View, FlatList, StyleSheet, Text, Image
+    SafeAreaView, View, FlatList, StyleSheet, Text, Image, TextInput
 } from 'react-native'
 import React from 'react'
 
-const Product = [
+const DATA = [
     {
         id: '1',
-        title: 'Sugar Substitute',
-        img: require("../assets/image133.png"),
+        title: 'Wave alpha',
+        img: require("../assets/motorbike1.jpg"),
     },
     {
         id: '2',
-        title: 'Juices & Vinegars',
-        img: require("../assets/image134.png"),
+        title: 'Vision',
+        img: require("../assets/motorbike5.jpg"),
 
     },
     {
         id: '3',
-        title: 'Vitamins Medicines',
-        img: require("../assets/image135.png"),
+        title: 'Winner X',
+        img: require("../assets/motorbike3.jpg"),
 
     },
     {
         id: '4',
-        title: 'Vitamins Medicines',
-        img: require("../assets/image133.png"),
+        title: 'Winner',
+        img: require("../assets/motorbike4.jpg"),
 
     },
     {
         id: '5',
-        title: 'Vitamins Medicines',
-        img: require("../assets/image134.png"),
+        title: 'Wave',
+        img: require("../assets/motorbike2.jpg"),
 
     }
 ];
-
 const AllProducts = [
     {
         id: "1",
-        name: "Accu-check Active Test Strip",
-        img: require("../assets/image20.png"),
+        name: "Wave",
+        img: require("../assets/motorbike9.jpg"),
         price: 112,
     },
     {
         id: "2",
-        name: "Omron HEM-8712 BP Monitor",
-        img: require("../assets/image21.png"),
+        name: "Vision",
+        img: require("../assets/motorbike8.jpg"),
+        price: 150,
+    },
+    {
+        id: "3",
+        name: "Vision",
+        img: require("../assets/motorbike3.jpg"),
+        price: 112,
+    },
+    {
+        id: "4",
+        name: "Vision",
+        img: require("../assets/motorbike4.jpg"),
         price: 150,
     },
     {
         id: "3",
         name: "Accu-check Active Test Strip",
-        img: require("../assets/image22.png"),
+        img: require("../assets/motorbike3.jpg"),
         price: 112,
     },
     {
         id: "4",
         name: "Omron HEM-8712 BP Monitor",
-        img: require("../assets/image23.png"),
-        price: 150,
-    },
-    {
-        id: "3",
-        name: "Accu-check Active Test Strip",
-        img: require("../assets/image22.png"),
-        price: 112,
-    },
-    {
-        id: "4",
-        name: "Omron HEM-8712 BP Monitor",
-        img: require("../assets/image23.png"),
+        img: require("../assets/motorbike5.jpg"),
         price: 150,
     },
 ];
-
-const Item = ({ title, img }) => (
-    <View style={styles.item}>
-        <Image style={styles.image} source={img} />
-        <Text style={styles.title}>{title}</Text>
-
-    </View>
-);
+//all product
 const AllProduct = ({ name, img, price }) => (
     <View style={styles.allProduct}>
         <Image style={styles.imgProduct} source={img} />
@@ -91,50 +83,126 @@ const AllProduct = ({ name, img, price }) => (
 const render = ({ item }) => (
     <AllProduct name={item.name} img={item.img} price={item.price} />
 );
+
+//data
+const Item = ({ title, img }) => (
+    <View style={styles.item}>
+        <Image style={styles.image} source={img} />
+        <Text style={styles.title}>{title}</Text>
+    </View>
+);
 const Home = () => {
-    const renderItem = ({ item }) => (
+
+    const renderItem = ({ item, img }) => (
         <Item title={item.title} img={item.img} />
     );
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Diabetic Diet</Text>
+
+            <View style={styles.header}>
+                <View>
+                    <Image style={styles.map} source={require("../assets/group1194.png")} />
+                </View>
+                <View>
+                    <Image style={styles.imageMoto} source={require("../assets/rectangle1345.png")} />
+                    <Text>RENT MOTORBIKE</Text>
+                </View>
+                <View><Image style={styles.profile} source={require("../assets/utTien.png")} /></View>
+            </View>
+            <View>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeText}
+                    value={text}
+                />
+            </View>
+
+            <View style={styles.automaker}>
+                <Text style={styles.automakeAll}>All</Text>
+                <Text style={styles.automakerBrand}>Honda</Text>
+                <Text style={styles.automakerBrand}>Yamaha</Text>
+                <Text style={styles.automakerBrand}>Suzuki</Text>
+            </View>
             <FlatList
-                data={Product}
+                data={DATA}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 horizontal
-
             />
             <View style={styles.product}>
-      <Text style={styles.title3}>All Products</Text>
-      <SafeAreaView>
-        <FlatList
-          numColumns={2}
-          data={AllProducts}
-          renderItem={render}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    </View>
+                <Text style={styles.title3}>All Products</Text>
+                <SafeAreaView>
+                    <FlatList
+                        numColumns={2}
+                        data={AllProducts}
+                        renderItem={render}
+                        keyExtractor={(item) => item.id}
+                    />
+                </SafeAreaView>
+            </View>
+
         </SafeAreaView>
+        
     );
+    const [text, onChangeText] = React.useState("Find motorcyle, etc");
+
+
 }
 
 const styles = StyleSheet.create({
     container: {
     },
-    item: {
-        marginVertical: 8,
-        marginHorizontal: 15,
+    header: {
+        flexDirection: "row",
+        display: 'flex',
+        justifyContent: 'space-between'
     },
-    title: {
+    map: {
+        width: 50,
+        height: 50,
+    },
+    imageMoto: {
+        width: 100,
+        height: 80,
+    },
+    profile: {
+        width: 50,
+        height: 50,
+        borderRadius: 30,
+    },
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        borderRadius: 30,
+        padding: 10,
+    },
+    automaker: {
+        flexDirection: "row",
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    automakeAll:{
+        color:"green",
+        fontSize:30
+    },
+    automakerBrand:{
+        fontSize:20,
+        
+    },
+    image:{
+        width:140,
+        height:100,
+    },
+    title:{
+        marginLeft:30,
         fontSize: 13,
-        width: 65
     },
-    allProduct:{
-        marginLeft:20,
+    imgProduct:{
+        width:200,
+        height:140,
     }
-    
+
 });
 export default Home;
